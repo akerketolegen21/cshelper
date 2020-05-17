@@ -1,4 +1,4 @@
 # cshelper
 CSHelper Telegram Bot v1 <br>
-is under development by Akerke Tolegen,Meruyert Tlemissova, Tomiris Zhumanazarova
-May, 18, 2020
+under development <br>by Akerke Tolegen,Meruyert Tlemissova, Tomiris Zhumanazarova
+<br>May, 18, 2020
