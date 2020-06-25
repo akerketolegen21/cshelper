@@ -1,47 +1,4 @@
 {
-   "result" : [
-      {
-         "message" : {
-            "from" : {
-               "language_code" : "en",
-               "is_bot" : false,
-               "first_name" : "akerke",
-               "id" : 456606872,
-               "username" : "akerke_t"
-            },
-            "text" : "Update 1",
-            "chat" : {
-               "type" : "private",
-               "first_name" : "akerke",
-               "id" : 456606872,
-               "username" : "akerke_t"
-            },
-            "message_id" : 5,
-            "date" : 1589788681
-         },
-         "update_id" : 875960600
-      },
-      {
-         "update_id" : 875960601,
-         "message" : {
-            "date" : 1589788685,
-            "text" : "Update 2",
-            "from" : {
-               "id" : 456606872,
-               "username" : "akerke_t",
-               "is_bot" : false,
-               "first_name" : "akerke",
-               "language_code" : "en"
-            },
-            "message_id" : 6,
-            "chat" : {
-               "id" : 456606872,
-               "username" : "akerke_t",
-               "type" : "private",
-               "first_name" : "akerke"
-            }
-         }
-      }
-   ],
+   "result" : [],
    "ok" : true
 }
