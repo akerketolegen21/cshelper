@@ -14,10 +14,13 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "telegraf": "^3.38.0"
+    "telegraf": "^3.38.0",
+    "wizard": "^2.0.0"
   },
-  "courses" : {
+  "./js/courses": {
+    "type": "module"
+  },
+  "./js/textHandler": {
     "type": "module"
   }
 }
-

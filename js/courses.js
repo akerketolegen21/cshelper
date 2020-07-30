@@ -15,23 +15,24 @@ const otherCsCourses = ['CSCI 245: Systems Analysis and Design', 'CSCI 262: Soft
 const initList = ['Core courses info', 'Other CS Courses', 'Non-CS Technical electives', 'Natural science electives', 'Back']
 
 const courseKeyboard = [['Syllabus', 'Tips', 'Web-site', 'Prof']]
-function splitStr(str) { 
+function splitStr(str, param) { 
       
     // Function to split string 
     var string = str.split(" "); 
-      
-    return Array<string> ans;
+    var res = string[param - 1];
+    return res;
 } 
-
 function getCurrentCourse(message) {
-    let course = splitStr(message)[0];
+    let course = splitStr(message, 1);
     return course;
 }
 function getCurrentCode(message){
-    let code = splitStr(message)[1];
+    let code = splitStr(message, 2);
 
     return code;
 }
+
+
 exports.coreCourses = coreCourses; exports.otherCsCourses = otherCsCourses; exports.initList = initList;
 exports.courseKeyboard = courseKeyboard;
 exports.getCurrentCode = getCurrentCode; exports.getCurrentCourse = getCurrentCourse;
