@@ -2,8 +2,16 @@ const Telegraf = require('telegraf')
 const Extra = require('telegraf/extra')
 const Markup = require('telegraf/markup')
 require('dotenv').config()
+
 const token = process.env.BOT_TOKEN
 const bot = new Telegraf(token)
+
+let coreCourses = ['CSCI 151: Programming for Scientists and Engineers', 'CSCI 152: Performance and Data Structures', 
+'CSCI 231: Computer Systems and Organizations', 'CSCI 235: Programming Languages',  'CSCI 270: Algorithms', 
+'CSCI 272: Formal Languages', 'ROBT 206: Microcontrollers with Lab',
+'CSCI 307: Research Methods', 'CSCI 332: Operating Systems', 'CSCI 333: Computer Networks', 
+'CSCI 341: Database Systems', 'CSCI  361: Software Engineering', 
+'CSCI 390: Artificial Intelligence', 'CSCI 408: Senior Project I', 'CSCI 409: Senior Project II']
 
 bot.use(async (ctx, next) => {
     const start = new Date()
@@ -27,14 +35,12 @@ bot.command('learn', ctx => ctx.reply('Choose on what course you want info', Mar
     .extra()
 )
 )
-bot.hears('Core courses info', ctx => ctx.reply('Choose on what course you want info', Markup.keyboard(
-    ['CSCI 151: Programming for Scientists and Engineers', 'CSCI 152: Performance and Data Structures', 
-    'CSCI 231: Computer Systems and Organizations', 'CSCI 235: Programming Languages',  'CSCI 270: Algorithms', 
-    'CSCI 272: Formal Languages', 'ROBT 206: Microcontrollers with Lab',
-    'CSCI 307: Research Methods', 'CSCI 332: Operating Systems', 'CSCI 333: Computer Networks', 
-    'CSCI 341: Database Systems', 'CSCI  361: Software Engineering', 
-    'CSCI 390: Artificial Intelligence', 'CSCI 408: Senior Project I', 'CSCI 409: Senior Project II']
-    )
+bot.command('stop', (ctx) => {
+    ctx.reply(':)', Extra.markup((m) => m.removeKeyboard()))
+  })
+
+bot.hears('Core courses info', ctx => ctx.reply('Choose on what course you want info', 
+    Markup.keyboard(coreCourses)
     .resize()
     .extra()))
 
@@ -47,7 +53,11 @@ bot.hears('Other CS Courses', ctx => ctx.reply('Choose on what course you want i
     .extra()
     ))
 
-bot.hears("CSCI 151: Programming for Scientists and Engineers", Markup.keyboard(['151 Syllabus', '151 Tips', '151 Web-site', '151 Prof']))
+bot.hears("CSCI 151: Programming for Scientists and Engineers", ctx => ctx.reply('Choose' , 
+Markup.keyboard(['151 Syllabus', '151 Tips', '151 Web-site', '151 Prof'])
+.resize()
+    .extra()
+    ))
 bot.hears("151 Syllabus", ctx=> ctx.replyWithHtml(ctx.chat.id, "Sign in or sign up to this site to see the official website", Extra.Markup.inlineKeyboard([
     Markup.urlButton('Syllabus: Course Info', 'https://sst-csci.com/csci151/syllabus/about-the-course/'), 
     Markup.callbackButton('Delete', 'delete')
