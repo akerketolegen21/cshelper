@@ -15,5 +15,9 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "telegraf": "^3.38.0"
+  },
+  "courses" : {
+    "type": "module"
   }
 }
+
