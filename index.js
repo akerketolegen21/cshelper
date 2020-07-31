@@ -4,7 +4,7 @@ const Markup = require('telegraf/markup')
 require('dotenv').config()
 var Courses = require('./js/courses')
 
-const WizardScene = require('telegraf/scenes/wizard')
+const WizardScene = require('telegraf/scenes/base')
 const Stage = require('telegraf/stage')
 const { leave } = Stage
 const token = process.env.BOT_TOKEN
@@ -36,28 +36,32 @@ bot.hears('Core courses info', ctx => {
   ctx.reply('Choose on what course you want info', 
     Markup.keyboard(Courses.coreCourses)
     .resize()
-    .extra());
+    .extra())
+
 }
 )
 
-const coursesWizard = new WizardScene('courses', (ctx) => {
-    currentCourse = ctx.message.text
-    ctx.reply('Choose ' + currentCourse, 
-    Markup.keyboard(Courses.courseKeyboard).resize().extra())
-  })
-
-  const stage = new Stage()
-
-  bot.use(stage.middleware()) 
-
-  bot.hears('Other CS Courses', async (ctx) => {
-    await ctx.reply('Choose on what course you want info', Markup.keyboard(
+const coursesWizard = new WizardScene('courses',  (ctx) => {
+     ctx.reply('Choose on what course you want info', Markup.keyboard(
       Courses.otherCsCourses)
       .resize()
       .extra()
       )
-    await ctx.scene.enter('courses');
+     ctx.scene.enter('courses')
+    return ctx.scene.next();
+    }, (ctx) => {
+    currentCourse = ctx.message.text
+    ctx.reply('Choose ' + currentCourse, 
+    Markup.keyboard(Courses.courseKeyboard).resize().extra())
+    return ctx.scene.leave()
   })
+
+  const stage = new Stage()
+  stage.register(coursesWizard)
+  bot.use(Telegraf.session())
+  bot.use(stage.middleware()) 
+
+  bot.hears('Other CS Courses', Stage.enter('courses'))
   
 // function syllabi (course, ctx) {
 //   if (currentCourse[0] == 'CSCI') {
