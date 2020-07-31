@@ -5,6 +5,8 @@ require('dotenv').config()
 var Courses = require('./js/courses')
 
 const WizardScene = require('telegraf/scenes/wizard')
+const Stage = require('telegraf/stage')
+const { leave } = Stage
 const token = process.env.BOT_TOKEN
 const bot = new Telegraf(token)
 
@@ -19,17 +21,10 @@ bot.use(async (ctx, next) => {
 bot.catch((err, ctx) => {
     console.log(`Ooops, encountered an error for ${ctx.updateType}`, err)})
 
-bot.start((ctx) => ctx.reply("Hey, "+ctx.message.from.first_name+", we're here to help our fellow CS students with course and career info! Let's start! Привет, мы хотим помочь студентам CS с курсами и поделиться другими полезными материалами! Начнем!"))
+bot.start((ctx) => ctx.reply("Hey, "+ctx.message.from.first_name+", we're here to help our fellow CS students with course and career info! Enter /learn to start! Привет, мы хотим помочь студентам CS с курсами и поделиться другими полезными материалами! Введите /learn, чтобы начать!"))
 
 bot.help(ctx => ctx.reply("Here's our small FAQ section"))
 
-// bot.on('text', ctx => {
-        
-//   let msg = ctx.update.message.text
-//   for (const course of Courses.coreCourses){
-//       if (msg == course) return [getCurrentCourse(msg), getCurrentCode(msg)];
-//   }
-// })
 bot.command('learn', ctx => ctx.reply('Choose on what course you want info', 
     Markup.keyboard(Courses.initList).resize().extra()))
 
@@ -45,26 +40,25 @@ bot.hears('Core courses info', ctx => {
 }
 )
 
-bot.hears('Other CS Courses', ctx => {
-  
 const coursesWizard = new WizardScene('courses', (ctx) => {
-  
-    ctx.reply('Choose on what course you want info', Markup.keyboard(
+    currentCourse = ctx.message.text
+    ctx.reply('Choose ' + currentCourse, 
+    Markup.keyboard(Courses.courseKeyboard).resize().extra())
+  })
+
+  const stage = new Stage()
+
+  bot.use(stage.middleware()) 
+
+  bot.hears('Other CS Courses', async (ctx) => {
+    await ctx.reply('Choose on what course you want info', Markup.keyboard(
       Courses.otherCsCourses)
       .resize()
       .extra()
       )
-      return ctx.wizard.next()
-  },
-  (ctx) => {
-    const currentCourse = ctx.update.message.text
-    ctx.reply('Choose ' + currentCourse, 
-    Markup.keyboard(Courses.courseKeyboard).resize().extra())
-
-
+    await ctx.scene.enter('courses');
   })
-})
-
+  
 // function syllabi (course, ctx) {
 //   if (currentCourse[0] == 'CSCI') {
 //       if (currentCourse[1] == '151') {

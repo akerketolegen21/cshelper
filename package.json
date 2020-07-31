@@ -20,7 +20,10 @@
   "./js/courses": {
     "type": "module"
   },
-  "./js/textHandler": {
-    "type": "module"
+  "./telegraf/markup" : {
+    "type" : "module"
+  },
+  "./telegraf/extra" : {
+    "type" : "module"
   }
 }
