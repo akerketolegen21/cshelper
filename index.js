@@ -47,7 +47,7 @@ const coursesScene = new wizardScene('othercourses',  (ctx) => {
   Markup.keyboard(Courses.initList).resize().extra())
   return ctx.scene.leave()
 }
-  ctx.reply('Choose ' + currentCourse, 
+  ctx.reply('Choose', 
   Markup.keyboard(Courses.courseKeyboard).resize().extra())
   return ctx.wizard.next()
  }, (ctx) => {
@@ -75,7 +75,7 @@ const coreCoursesScene = new wizardScene('corecourses',  (ctx) => {
    ctx.reply('Choose on what courses you want info', 
  Markup.keyboard(Courses.initList).resize().extra())
   return ctx.scene.leave()}
-ctx.reply('Choose ' + currentCourse, 
+ctx.reply('Choose', 
  Markup.keyboard(Courses.courseKeyboard).resize().extra())
  return ctx.wizard.next()
 }, (ctx) => {
@@ -97,20 +97,47 @@ bot.use(stage.middleware())
 
 bot.hears('Other CS Courses', Stage.enter('othercourses'))
 bot.hears('Core courses info', Stage.enter('corecourses'))
-// function syllabi (course, ctx) {
-//   if (currentCourse[0] == 'CSCI') {
-//       if (currentCourse[1] == '151') {
-//           ctx.replyWithHTML("Sign in or sign up to this site to see the official website", Extra.HTML().markup(m =>
-//             m.inlineKeyboard([
-              
-//               m.urlButton('Syllabus: Course Info', 'https://sst-csci.com/csci151/syllabus/about-the-course/'),
-//               m.callbackButton('Delete', 'delete')]),))}
-//   } 
+function syllabi (course, ctx) {
+  courseCode = Courses.getCurrentCode(course)
+  courseName = Courses.getCurrentCourse(course)
+  console.log(courseCode + ' ' + courseName)
   
-// }
+  switch (courseName == 'CSCI') {
+      case (courseCode == '151') :
+          ctx.replyWithHTML("Sign in or sign up to this site to see the official website", Extra.HTML().markup(m =>
+            m.inlineKeyboard([
+              
+              m.urlButton('Syllabus: Course Info', 'https://sst-csci.com/csci151/syllabus/about-the-course/'),
+              m.callbackButton('Delete', 'delete')]),))
+            break;
+      case (courseCode == '152') :
+        ctx.replyWithHTML("Sign in or sign up to this site to see the official website", Extra.HTML().markup(m =>
+          m.inlineKeyboard([
+            
+            m.urlButton('Syllabus: Course Info', 'https://sst-csci.com/csci152/syllabus/about-the-course/'),
+            m.callbackButton('Delete', 'delete')]),))
+        break;
+      
+      case (courseCode == '231') :
+        ctx.replyWithDocument(ctx.chat.id,{
+          source: 'syl/CS231_syllabus.docx'}).catch(function(error){ console.log(error); })
+        break;
+      case (courseCode == '235') :
+        ctx.replyWithDocument(ctx.chat.id,{
+          source: 'https://vk.com/doc292229323_548245432?hash=efebbb0e17ef32103e&dl=b8445921788110ea41'}).catch(function(error){ console.log(error); })
+        break;
+      case (courseCode == '270') :
+
+        break;
+      case (courseCode == '272') :
+        ctx.replyWithDocument(ctx.chat.id,'syl/Syllabus_Math_273_Introduction_to_Linear_Algebra_with_Applications.pdf').catch(function(error){ console.log(error); })
+        
+        break;
+
+  } 
+  return ctx.scene.enter('corecourses')
+}
   
 bot.launch()
 
-// TODO: after choosing the course, each time parse the string to save current course, course code
-// to find further like this switch 'CSCI': case '151', case '152' etc.
-// TODO: going back
+// TODO: find a way to check whether a student is a NU stud
