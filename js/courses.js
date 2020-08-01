@@ -14,7 +14,7 @@ const otherCsCourses = ['CSCI 245: Systems Analysis and Design', 'CSCI 262: Soft
 
 const initList = ['Core courses info', 'Other CS Courses', 'Non-CS Technical electives', 'Natural science electives', 'Back']
 
-const courseKeyboard = [['Syllabus', 'Tips', 'Web-site', 'Prof']]
+const courseKeyboard = [['Syllabus', 'Tips', 'Web-site', 'Back']]
 function splitStr(str, param) { 
       
     // Function to split string 

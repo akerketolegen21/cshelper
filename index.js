@@ -4,14 +4,13 @@ const Markup = require('telegraf/markup')
 require('dotenv').config()
 var Courses = require('./js/courses')
 
-const WizardScene = require('telegraf/scenes/base')
+const wizardScene = require('telegraf/scenes/wizard')
 const Stage = require('telegraf/stage')
 const { leave } = Stage
 const token = process.env.BOT_TOKEN
 const bot = new Telegraf(token)
 
 var currentCourse;
-var steps = 0;
 bot.use(async (ctx, next) => {
     const start = new Date()
     await next()
@@ -25,44 +24,79 @@ bot.start((ctx) => ctx.reply("Hey, "+ctx.message.from.first_name+", we're here t
 
 bot.help(ctx => ctx.reply("Here's our small FAQ section"))
 
-bot.command('learn', ctx => ctx.reply('Choose on what course you want info', 
+bot.command('learn', ctx => ctx.reply('Choose on what courses you want info', 
     Markup.keyboard(Courses.initList).resize().extra()))
 
 bot.command('stop', (ctx) => {
     ctx.reply(':)', Extra.markup((m) => m.removeKeyboard()))
   })
 
-bot.hears('Core courses info', ctx => {
+
+const coursesScene = new wizardScene('othercourses',  (ctx) => {
+  ctx.reply('Choose on what course you want info', Markup.keyboard(
+  Courses.otherCsCourses)
+  .resize()
+  .extra())
+  currentCourse
+  return ctx.wizard.next()
+}, (ctx) => {
+  currentCourse = ctx.message.text
+  if (currentCourse === 'Back') {
+    currentCourse = ''
+    ctx.reply('Choose on what courses you want info', 
+  Markup.keyboard(Courses.initList).resize().extra())
+  return ctx.scene.leave()
+}
+  ctx.reply('Choose ' + currentCourse, 
+  Markup.keyboard(Courses.courseKeyboard).resize().extra())
+  return ctx.wizard.next()
+ }, (ctx) => {
+   if (ctx.message.text === 'Syllabus') syllabi(currentCourse, ctx)
+   else if (ctx.message.text === 'Tips') tips(currentCourse, ctx)
+   else if (ctx.message.text ==='Web-site') website(currentCourse, ctx)
+   else if (ctx.message.text === 'Back') {
+     currentCourse = ''
+     return ctx.scene.enter('othercourses')
+   }
+   return ctx.scene.leave()
+ })
+
+const coreCoursesScene = new wizardScene('corecourses',  (ctx) => {
   ctx.reply('Choose on what course you want info', 
     Markup.keyboard(Courses.coreCourses)
     .resize()
     .extra())
+  currentCourse
+  return ctx.wizard.next()
+}, (ctx) => {
+ currentCourse = ctx.message.text
+ if (currentCourse === 'Back') {
+   currentCourse = ''
+   ctx.reply('Choose on what courses you want info', 
+ Markup.keyboard(Courses.initList).resize().extra())
+  return ctx.scene.leave()}
+ctx.reply('Choose ' + currentCourse, 
+ Markup.keyboard(Courses.courseKeyboard).resize().extra())
+ return ctx.wizard.next()
+}, (ctx) => {
+  if (ctx.message.text === 'Syllabus') syllabi(currentCourse, ctx)
+  else if (ctx.message.text === 'Tips') tips(currentCourse, ctx)
+  else if (ctx.message.text === 'Web-site') website(currentCourse, ctx)
+  else if (ctx.message.text === 'Back') {
+    currentCourse = ''
+    return ctx.scene.enter('corecourses')
+  }
+  return ctx.scene.leave()
+})
+const stage = new Stage()
+stage.register(coursesScene)
+stage.register(coreCoursesScene)
+bot.use(Telegraf.session())
+bot.use(stage.middleware()) 
 
-}
-)
 
-const coursesWizard = new WizardScene('courses',  (ctx) => {
-     ctx.reply('Choose on what course you want info', Markup.keyboard(
-      Courses.otherCsCourses)
-      .resize()
-      .extra()
-      )
-     ctx.scene.enter('courses')
-    return ctx.scene.next();
-    }, (ctx) => {
-    currentCourse = ctx.message.text
-    ctx.reply('Choose ' + currentCourse, 
-    Markup.keyboard(Courses.courseKeyboard).resize().extra())
-    return ctx.scene.leave()
-  })
-
-  const stage = new Stage()
-  stage.register(coursesWizard)
-  bot.use(Telegraf.session())
-  bot.use(stage.middleware()) 
-
-  bot.hears('Other CS Courses', Stage.enter('courses'))
-  
+bot.hears('Other CS Courses', Stage.enter('othercourses'))
+bot.hears('Core courses info', Stage.enter('corecourses'))
 // function syllabi (course, ctx) {
 //   if (currentCourse[0] == 'CSCI') {
 //       if (currentCourse[1] == '151') {
