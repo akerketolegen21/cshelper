@@ -189,7 +189,6 @@ function syllabi (course, ctx) {
 function tips(course, ctx){
   courseCode = Courses.getCurrentCode(course)
   courseName = Courses.getCurrentCourse(course)
-  console.log(courseCode + ' ' + courseName)
   if ( courseName == 'MATH') {
     switch ( courseCode) {
       case '161' :
@@ -209,7 +208,7 @@ function tips(course, ctx){
         return ctx.scene.leave()
   }
 }
-  if (courseName == 'PHYS'){
+  else if (courseName == 'PHYS'){
     switch ( courseCode) {
       case '161' :
         
@@ -221,7 +220,7 @@ function tips(course, ctx){
           return ctx.scene.leave()
   }
 }
-  if (courseName == 'CSCI') {
+  else if (courseName == 'CSCI') {
     switch (courseCode) {
         case '151' :
           ctx.reply(Courses.c151)
@@ -252,6 +251,10 @@ function tips(course, ctx){
           Markup.keyboard(Courses.initList).resize().extra())
           return ctx.scene.leave()
         }
+      }else {
+        ctx.reply("No tips available for this course. If you'd like to contribute, please click here /stop then /feedback", 
+          Markup.keyboard(Courses.initList).resize().extra())
+          return ctx.scene.leave()
       }
   return ctx.scene.enter('corecourses')
 }
@@ -259,16 +262,18 @@ function tips(course, ctx){
 function website(course, ctx){
   courseCode = Courses.getCurrentCode(course)
   courseName = Courses.getCurrentCourse(course)
-  console.log(courseCode + ' ' + courseName)
-  
   if (courseName == 'CSCI') {
-      if (courseCode == '151' || courseCode == '152') {}
+      if (courseCode == '151' || courseCode == '152') {
         ctx.replyWithHTML("Sign in or sign up to the official website of CSCI 151/152 and choose " + courseName + ' ' + courseCode, Extra.HTML().markup(m =>
           m.inlineKeyboard([
             
             m.urlButton('Syllabus: Course Info', 'https://sst-csci.com/'),
             m.callbackButton('Delete', 'delete')]),))
   }else{
+
+    ctx.reply("No website for this course")
+    
+}}else{
 
         ctx.reply("No website for this course")
         
@@ -277,9 +282,6 @@ function website(course, ctx){
   return ctx.scene.enter('corecourses')
 }
 
-
 bot.launch()
 // module.exports = bot
-// warm-bayou-82798
-// https://warm-bayou-82798.herokuapp.com/
 // TODO: find a way to check whether a student is a NU stud
