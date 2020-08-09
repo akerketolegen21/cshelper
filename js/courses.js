@@ -10,7 +10,7 @@ const coreCourses = ['CSCI 151 : Programming for Scientists and Engineers', 'CSC
 'CSCI 341 : Database Systems', 'CSCI 361 : Software Engineering', 
 'CSCI 390 : Artificial Intelligence', 'Back']
 
-const otherCsCourses = ['CSCI 245 : Systems Analysis and Design', 'CSCI 262 : Software Project Management', 'CSCI 281 : Human-Computer Interaction',
+const otherCsCourses = ['CSCI 245 : Systems Analysis and Design', 'CSCI 262 : Software Project Management', 
 'CSCI 281 : Human-Computer Interaction', 'CSCI 325 : High Performance Computing', 'CSCI 330 : Mobile Computing',
 'CSCI 331 : Advanced Mobile Computing', 'CSCI 336 : Ubiquity and Sensing', 'Back'
 ]
