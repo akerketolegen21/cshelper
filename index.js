@@ -3,8 +3,6 @@ const Telegraf = require('telegraf')
 const Extra = require('telegraf/extra')
 const Markup = require('telegraf/markup')
 require('dotenv').config()
-const PORT = process.env.PORT || 3000
-
 var Courses = require('./js/courses')
 const wizardScene = require('telegraf/scenes/wizard')
 const Stage = require('telegraf/stage')
