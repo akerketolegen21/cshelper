@@ -8,7 +8,7 @@ const wizardScene = require('telegraf/scenes/wizard')
 const Stage = require('telegraf/stage')
 const { leave } = Stage
 const token = process.env.BOT_TOKEN
-const bot = new Telegraf
+const bot = new Telegraf(token)
 var currentCourse, fbMessage;
 bot.use(async (ctx, next) => {
     const start = new Date()
