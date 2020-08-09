@@ -3,7 +3,8 @@ const Telegraf = require('telegraf')
 const Extra = require('telegraf/extra')
 const Markup = require('telegraf/markup')
 require('dotenv').config()
-const PORT = process.env.PORT || 80
+const PORT = process.env.PORT || 3000
+
 var Courses = require('./js/courses')
 const wizardScene = require('telegraf/scenes/wizard')
 const Stage = require('telegraf/stage')
@@ -17,6 +18,9 @@ bot.use(async (ctx, next) => {
     const ms = new Date() - start
     console.log('Response time: %sms', ms)
 })
+bot.listen(PORT, () => {
+  console.log(`Our bot is running on port ${ PORT }`);
+});
 bot.catch((err, ctx) => {
     console.log(`Ooops, encountered an error for ${ctx.updateType}`, err)})
 
@@ -190,7 +194,6 @@ function syllabi (course, ctx) {
 function tips(course, ctx){
   courseCode = Courses.getCurrentCode(course)
   courseName = Courses.getCurrentCourse(course)
-  console.log(courseCode + ' ' + courseName)
   if ( courseName == 'MATH') {
     switch ( courseCode) {
       case '161' :
@@ -264,10 +267,8 @@ function tips(course, ctx){
 function website(course, ctx){
   courseCode = Courses.getCurrentCode(course)
   courseName = Courses.getCurrentCourse(course)
-  console.log(courseCode + ' ' + courseName)
-  
   if (courseName == 'CSCI') {
-      if (courseCode == '151' || courseCode == '152') {}
+      if (courseCode == '151' || courseCode == '152') {
         ctx.replyWithHTML("Sign in or sign up to the official website of CSCI 151/152 and choose " + courseName + ' ' + courseCode, Extra.HTML().markup(m =>
           m.inlineKeyboard([
             
