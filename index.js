@@ -252,6 +252,10 @@ function tips(course, ctx){
           Markup.keyboard(Courses.initList).resize().extra())
           return ctx.scene.leave()
         }
+      }else {
+        ctx.reply("No tips available for this course. If you'd like to contribute, please click here /stop then /feedback", 
+          Markup.keyboard(Courses.initList).resize().extra())
+          return ctx.scene.leave()
       }
   return ctx.scene.enter('corecourses')
 }
