@@ -5,7 +5,7 @@ const coreCourses = ['CSCI 151 : Programming for Scientists and Engineers', 'CSC
 'PHYS 162 : Physics for Scientist and Engineers with Lab II',
 'CSCI 231 : Computer Systems and Organizations', 'CSCI 235 : Programming Languages',  'CSCI 270 : Algorithms', 
 'CSCI 272  : Formal Languages', 'ROBT 206 : Microcontrollers with Lab',
-'MAT 273 : Linear Algebra',
+'MATH 273 : Linear Algebra',
 'CSCI 307 : Research Methods', 'CSCI 332 : Operating Systems', 'CSCI 333 : Computer Networks', 
 'CSCI 341 : Database Systems', 'CSCI 361 : Software Engineering', 
 'CSCI 390 : Artificial Intelligence', 'Back']
