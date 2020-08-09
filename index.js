@@ -22,7 +22,7 @@ bot.use(async (ctx, next) => {
 // bot.catch((err, ctx) => {
 //     console.log(`Ooops, encountered an error for ${ctx.updateType}`, err)})
 
-bot.start((ctx) => ctx.reply("Hey, "+ctx.message.from.first_name+", we're here to help our fellow CS students with course and career info! Enter /learn to start! Привет, мы хотим помочь студентам CS с курсами и поделиться другими полезными материалами! Введите /learn, чтобы начать!"))
+bot.start((ctx) => ctx.reply("Hey, "+ctx.message.from.first_name+", we're here to help our fellow CS students with course and career info! \nEnter /learn to start!\nПривет, мы хотим помочь студентам CS с курсами и поделиться другими полезными материалами!\nВведите /learn, чтобы начать!"))
 
 bot.help(ctx => ctx.reply("Here's our small FAQ section"))
 
