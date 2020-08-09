@@ -209,7 +209,7 @@ function tips(course, ctx){
         return ctx.scene.leave()
   }
 }
-  if (courseName == 'PHYS'){
+  else if (courseName == 'PHYS'){
     switch ( courseCode) {
       case '161' :
         
@@ -221,7 +221,7 @@ function tips(course, ctx){
           return ctx.scene.leave()
   }
 }
-  if (courseName == 'CSCI') {
+  else if (courseName == 'CSCI') {
     switch (courseCode) {
         case '151' :
           ctx.reply(Courses.c151)
