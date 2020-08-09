@@ -20,7 +20,7 @@ bot.use(async (ctx, next) => {
 })
 bot.listen(PORT, () => {
   console.log(`Our bot is running on port ${ PORT }`);
-});
+})
 bot.catch((err, ctx) => {
     console.log(`Ooops, encountered an error for ${ctx.updateType}`, err)})
 
@@ -274,7 +274,7 @@ function website(course, ctx){
             
             m.urlButton('Syllabus: Course Info', 'https://sst-csci.com/'),
             m.callbackButton('Delete', 'delete')]),))
-  }else{
+  }}else{
 
         ctx.reply("No website for this course")
         
