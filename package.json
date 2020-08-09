@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "micro-bot",
     "run-build": "run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,16 +17,16 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "telegraf": "^3.38.0",
+    "micro-bot": "^2.5.3",
     "wizard": "^2.0.0"
   },
   "./js/courses": {
     "type": "module"
   },
-  "./telegraf/markup" : {
-    "type" : "module"
+  "./telegraf/markup": {
+    "type": "module"
   },
-  "./telegraf/extra" : {
-    "type" : "module"
+  "./telegraf/extra": {
+    "type": "module"
   }
 }

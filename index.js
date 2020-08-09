@@ -1,5 +1,5 @@
 const Telegraf = require('telegraf')
-// const { Composer } = require('micro-bot')
+const { Composer } = require('micro-bot')
 const Extra = require('telegraf/extra')
 const Markup = require('telegraf/markup')
 require('dotenv').config()
@@ -7,8 +7,10 @@ var Courses = require('./js/courses')
 const wizardScene = require('telegraf/scenes/wizard')
 const Stage = require('telegraf/stage')
 const { leave } = Stage
-const token = process.env.BOT_TOKEN
-const bot = new Telegraf(token)
+// const token = process.env.BOT_TOKEN
+// const bot = new Telegraf(token)
+
+const bot = new Composer
 var currentCourse, fbMessage;
 bot.use(async (ctx, next) => {
     const start = new Date()
@@ -284,8 +286,8 @@ function website(course, ctx){
 }
 
 
-bot.launch()
-// module.exports = bot
+// bot.launch()
+module.exports = bot
 // warm-bayou-82798
 // https://warm-bayou-82798.herokuapp.com/
 // TODO: find a way to check whether a student is a NU stud
