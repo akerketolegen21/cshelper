@@ -18,9 +18,7 @@ bot.use(async (ctx, next) => {
     const ms = new Date() - start
     console.log('Response time: %sms', ms)
 })
-bot.listen(PORT, () => {
-  console.log(`Our bot is running on port ${ PORT }`);
-})
+
 bot.catch((err, ctx) => {
     console.log(`Ooops, encountered an error for ${ctx.updateType}`, err)})
 
