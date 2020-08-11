@@ -285,9 +285,6 @@ function website(course, ctx){
   return ctx.scene.enter('corecourses')
 }
 
-
-// bot.launch()
-module.exports = bot
-// warm-bayou-82798
-// https://warm-bayou-82798.herokuapp.com/
+bot.launch()
+// module.exports = bot
 // TODO: find a way to check whether a student is a NU stud
