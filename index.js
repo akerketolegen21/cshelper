@@ -4,6 +4,7 @@ const Extra = require('telegraf/extra')
 const Markup = require('telegraf/markup')
 require('dotenv').config()
 var Courses = require('./js/courses')
+const tools = require('./js/tools')
 const wizardScene = require('telegraf/scenes/wizard')
 const Stage = require('telegraf/stage')
 const { leave } = Stage
@@ -21,6 +22,7 @@ bot.use(async (ctx, next) => {
 
 // bot.catch((err, ctx) => {
 //     console.log(`Ooops, encountered an error for ${ctx.updateType}`, err)})
+
 
 bot.start((ctx) => ctx.reply("Hey, "+ctx.message.from.first_name+", we're here to help our fellow CS students with course and career info! \nEnter /learn to start!\nПривет, мы хотим помочь студентам CS с курсами и поделиться другими полезными материалами!\nВведите /learn, чтобы начать!"))
 
@@ -44,7 +46,7 @@ const feedBackScene = new wizardScene('feedback',  (ctx) => {
   return ctx.scene.leave()
 }
  )
-
+ var currentscene
  const coursesScene = new wizardScene('othercourses',  (ctx) => {
   ctx.reply('Choose on what course you want info', Markup.keyboard(
   Courses.otherCsCourses)
