@@ -1,5 +1,3 @@
-const { keyboard } = require("telegraf/markup");
-
 const coreCourses = ['CSCI 151 : Programming for Scientists and Engineers', 'CSCI 152 : Performance and Data Structures', 
 'MATH 161 : Calculus I', 'MATH 162 : Calculus II', 'PHYS 161 : Physics for Scientist and Engineers with Lab I',
 'PHYS 162 : Physics for Scientist and Engineers with Lab II',
@@ -15,7 +13,8 @@ const otherCsCourses = ['CSCI 245 : Systems Analysis and Design', 'CSCI 262 : So
 'CSCI 331 : Advanced Mobile Computing', 'CSCI 336 : Ubiquity and Sensing', 'Back'
 ]
 const c_id = 456606872
-const initList = ['Core courses info', 'Other CS Courses']
+
+const initList = ['General tips for Freshman', 'Core courses info', 'Other CS Courses']
 
 const c151 = '1. Always do extra exercises after each lesson on the site, it will help you understand the topic deeper\n' + 
 '2. Exercises are also the best way to prepare to the quizzes and the final exam\n' + 
