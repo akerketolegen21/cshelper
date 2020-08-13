@@ -123,8 +123,7 @@ bot.hears(Courses.initList[1], Stage.enter('corecourses'))
 bot.hears(Courses.initList[0], ctx => ctx.reply(Courses.freshmanTips))
 bot.command('feedback', Stage.enter('feedback'))
 
+
 // bot.launch()
 module.exports = bot
-// warm-bayou-82798
-// https://warm-bayou-82798.herokuapp.com/
 // TODO: find a way to check whether a student is a NU stud
