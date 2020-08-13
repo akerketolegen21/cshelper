@@ -23,6 +23,9 @@
   "./js/courses": {
     "type": "module"
   },
+  "./js/tools": {
+    "type": "module"
+  },
   "./telegraf/markup": {
     "type": "module"
   },
