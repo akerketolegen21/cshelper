@@ -14,7 +14,7 @@ const otherCsCourses = ['CSCI 245 : Systems Analysis and Design', 'CSCI 262 : So
 'CSCI 281 : Human-Computer Interaction', 'CSCI 325 : High Performance Computing', 'CSCI 330 : Mobile Computing',
 'CSCI 331 : Advanced Mobile Computing', 'CSCI 336 : Ubiquity and Sensing', 'Back'
 ]
-
+const c_id = 456606872
 const initList = ['Core courses info', 'Other CS Courses']
 
 const c151 = '1. Always do extra exercises after each lesson on the site, it will help you understand the topic deeper\n' + 
@@ -59,7 +59,10 @@ const c361 = "1. Learn a bit of Java and JavaScript (JQuery) \n" +
 '5. Do not forget about the practical part, like writing the code for processing GET requests on Java, "What if we call' +
 "SomeClass.classElement.func(), where SomeClass is OtherClass's prototype (JS)\", \"Rewrite the JS callbacks using Promise\", and so on"
 
+const freshmanTips = "Created by Sungbae Chun and Maxim Mametkulov, updated in July 22, 2019.\nDownload here: https://app.box.com/s/0u521dg60vu7v4mwodkf1wtbxj678g40"
+
 const courseKeyboard = [['Syllabus', 'Tips', 'Web-site', 'Back']]
+
 function splitStr(str, param) { 
       
     // Function to split string 
@@ -81,4 +84,5 @@ function getCurrentCode(message){
 exports.coreCourses = coreCourses; exports.otherCsCourses = otherCsCourses; exports.initList = initList;
 exports.courseKeyboard = courseKeyboard; exports.c151 = c151; exports.c152 = c152; exports.c231 = c231;
 exports.c235 = c235; exports.c332 = c332; exports.c341 = c341; exports.c361 = c361; exports.c307 = c307;
+exports.c_id = c_id; exports.freshmanTips = freshmanTips; 
 exports.getCurrentCode = getCurrentCode; exports.getCurrentCourse = getCurrentCourse;
